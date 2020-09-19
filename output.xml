@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.0 on win32)" generated="20200521 11:50:41.792" rpa="false">
+<suite id="s1" name="TC1" source="C:\Users\mumtaz\Desktop\robotApi\VideoGameAPI\TC1.robot">
+<test id="s1-t1" name="TC1:Returns all video games(GET)">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>getVideos</arg>
+<arg>${base_URL}</arg>
+</arguments>
+<msg timestamp="20200521 11:50:41.950" level="INFO">Creating Session using : alias=getVideos, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200521 11:50:41.950" endtime="20200521 11:50:41.951"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>getVideos</arg>
+<arg>/app/videogames</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200521 11:50:41.951" level="INFO">GET Request using : uri=/app/videogames, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200521 11:50:45.994" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D5854A8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:50:50.229" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D579710&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:50:54.667" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D579D68&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:50:58.750" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /app/videogames (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EB710B8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
+<status status="FAIL" starttime="20200521 11:50:41.951" endtime="20200521 11:50:58.750"></status>
+</kw>
+<status status="FAIL" starttime="20200521 11:50:41.950" endtime="20200521 11:50:58.755" critical="yes">ConnectionError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /app/videogames (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EB710B8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
+</test>
+<test id="s1-t2" name="TC2:Add new video game(POST)">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>addVideo</arg>
+<arg>${base_URL}</arg>
+</arguments>
+<msg timestamp="20200521 11:50:58.774" level="INFO">Creating Session using : alias=addVideo, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200521 11:50:58.771" endtime="20200521 11:50:58.774"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>id=800</arg>
+<arg>name=BRAVE-HEART</arg>
+<arg>releaseDate=2000-01-01T11:37:35.943Z</arg>
+<arg>reviewScore=7</arg>
+<arg>category=Adventure</arg>
+<arg>rating=Universe</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200521 11:50:58.787" level="INFO">${body} = {'id': '800', 'name': 'BRAVE-HEART', 'releaseDate': '2000-01-01T11:37:35.943Z', 'reviewScore': '7', 'category': 'Adventure', 'rating': 'Universe'}</msg>
+<status status="PASS" starttime="20200521 11:50:58.782" endtime="20200521 11:50:58.787"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20200521 11:50:58.790" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20200521 11:50:58.790" endtime="20200521 11:50:58.790"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>addVideo</arg>
+<arg>/app/videogames</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${response_POST}</var>
+</assign>
+<msg timestamp="20200521 11:50:58.801" level="INFO">POST Request using : uri=/app/videogames, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json'} 
+data={"id": "800", "name": "BRAVE-HEART", "releaseDate": "2000-01-01T11:37:35.943Z", "reviewScore": "7", "category": "Adventure", "rating": "Universe"} 
+json=None</msg>
+<msg timestamp="20200521 11:51:02.837" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB240&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:07.077" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB3C8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:11.511" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB6D8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:15.543" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /app/videogames (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB8D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
+<status status="FAIL" starttime="20200521 11:50:58.795" endtime="20200521 11:51:15.543"></status>
+</kw>
+<status status="FAIL" starttime="20200521 11:50:58.766" endtime="20200521 11:51:15.545" critical="yes">ConnectionError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /app/videogames (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB8D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
+</test>
+<test id="s1-t3" name="TC3:Return video game by ID(GET)">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>getVideo_ID</arg>
+<arg>${base_URL}</arg>
+</arguments>
+<msg timestamp="20200521 11:51:15.557" level="INFO">Creating Session using : alias=getVideo_ID, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200521 11:51:15.555" endtime="20200521 11:51:15.558"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>getVideo_ID</arg>
+<arg>/app/videogames/800</arg>
+</arguments>
+<assign>
+<var>${response_getID}</var>
+</assign>
+<msg timestamp="20200521 11:51:15.567" level="INFO">GET Request using : uri=/app/videogames/800, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200521 11:51:19.604" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBED2B0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames/800</msg>
+<msg timestamp="20200521 11:51:23.847" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBED5C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames/800</msg>
+<status status="FAIL" starttime="20200521 11:51:15.560" endtime="20200521 11:51:25.871"></status>
+</kw>
+<status status="FAIL" starttime="20200521 11:51:15.553" endtime="20200521 11:51:25.874" critical="yes">Execution terminated by signal</status>
+</test>
+<test id="s1-t4" name="TC4:Update video game(PUT)">
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20200521 11:51:25.880" endtime="20200521 11:51:25.881" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-t5" name="TC5:Delete video game by ID(DELETE)">
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20200521 11:51:25.888" endtime="20200521 11:51:25.891" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<status status="FAIL" starttime="20200521 11:50:41.796" endtime="20200521 11:51:25.900"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="5">Critical Tests</stat>
+<stat pass="0" fail="5">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="3" info="combined" combined="NOT robot:exit">NOT robot:exit</stat>
+<stat pass="0" fail="2">robot:exit</stat>
+</tag>
+<suite>
+<stat pass="0" fail="5" id="s1" name="TC1">TC1</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20200521 11:50:45.994" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D5854A8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:50:50.229" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D579710&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:50:54.667" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24D579D68&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:02.837" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB240&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:07.077" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB3C8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:11.511" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBDB6D8&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames</msg>
+<msg timestamp="20200521 11:51:19.604" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBED2B0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames/800</msg>
+<msg timestamp="20200521 11:51:23.847" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24EBED5C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /app/videogames/800</msg>
+</errors>
+</robot>
